@@ -30,7 +30,12 @@ public class PlayerManager : MonoBehaviour
     {
         currentState.UpdateState(this);
     }
-    
+
+    private void FixedUpdate()
+    {
+        currentState.FixedUpdateState(this);
+    }
+
     public static PlayerManager GetInstance()
     {
         return instance;

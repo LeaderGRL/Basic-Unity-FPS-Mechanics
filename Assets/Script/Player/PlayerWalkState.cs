@@ -7,6 +7,8 @@ public class PlayerWalkState : PlayerBaseState
 {
     private Player player;
     private bool walk = false;
+    private float moveX;
+    private float moveZ;
     public override void EnterState(PlayerManager player)
     {
         this.player = PlayerManager.GetInstance().GetPlayer();
@@ -20,14 +22,16 @@ public class PlayerWalkState : PlayerBaseState
             walk = false;
             PlayerManager.GetInstance().SwitchState(new PlayerIdleState());
         }
-        else
+        
+        if (context.action.name == "Jump")
         {
-            walk = true;
-
+            PlayerManager.GetInstance().SwitchState(new PlayerJumpState());
         }
-        //this.player.gameObject.GetComponent<Rigidbody>().MovePosition(context.ReadValue<Vector2>() * 100);
 
-        //this.player.gameObject.GetComponent<Rigidbody>().AddForce(context.ReadValue<Vector2>() * 10);
+        moveX = context.ReadValue<Vector2>().x;
+        moveZ = context.ReadValue<Vector2>().y;
+        walk = true;
+       
     }
 
     public override void OnCollisionEnterState(PlayerManager player, Collision collision)
@@ -38,5 +42,19 @@ public class PlayerWalkState : PlayerBaseState
     public override void UpdateState(PlayerManager player)
     {
         //throw new System.NotImplementedException();
+    }
+
+    public override void FixedUpdateState(PlayerManager player)
+    {
+        if (walk)
+        {
+            Walk();
+        }
+    }
+
+    private void Walk()
+    {
+        Vector3 direction = this.player.transform.forward * moveZ + this.player.transform.right * moveX;
+        this.player.gameObject.GetComponent<Rigidbody>().AddForce(direction *  10);
     }
 }

@@ -20,11 +20,22 @@ public class PlayerIdleState : PlayerBaseState
         //throw new System.NotImplementedException();
     }
 
+    public override void FixedUpdateState(PlayerManager player)
+    {
+        //throw new System.NotImplementedException();
+    }
+
     public override void HandleInputState(PlayerManager player, InputAction.CallbackContext context)
     {
         if (context.action.name == "Movement")
         {
             PlayerManager.GetInstance().SwitchState(new PlayerWalkState());
+        }
+
+        if (context.action.name == "Jump")
+        {
+            Debug.Log("Jumping");
+            PlayerManager.GetInstance().SwitchState(new PlayerJumpState());
         }
     }
  
