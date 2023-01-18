@@ -29,13 +29,12 @@ public class PlayerIdleState : PlayerBaseState
     {
         if (context.action.name == "Movement")
         {
-            PlayerManager.GetInstance().SwitchState(new PlayerWalkState());
+            PlayerManager.GetInstance().SwitchState(player.GetWalkState());
         }
 
         if (context.action.name == "Jump")
         {
-            Debug.Log("Jumping");
-            PlayerManager.GetInstance().SwitchState(new PlayerJumpState());
+            PlayerManager.GetInstance().SwitchState(player.GetJumpState());
         }
     }
  

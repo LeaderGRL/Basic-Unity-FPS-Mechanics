@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 231817936}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -235,7 +235,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &632835569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,6 +371,7 @@ GameObject:
   - component: {fileID: 827052817}
   - component: {fileID: 827052816}
   - component: {fileID: 827052822}
+  - component: {fileID: 827052823}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -514,7 +515,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 632835569}
+      - m_Target: {fileID: 827052823}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
         m_MethodName: HandleInput
         m_Mode: 0
@@ -534,7 +535,7 @@ MonoBehaviour:
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 632835569}
+      - m_Target: {fileID: 827052823}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
         m_MethodName: HandleInput
         m_Mode: 0
@@ -553,6 +554,19 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &827052823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827052815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3219092f532869f44920929c2b9593fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 827052816}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,7 +21,8 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void HandleInputState(PlayerManager player, InputAction.CallbackContext context)
     {
-              //throw new System.NotImplementedException();
+        Debug.Log("Jump !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
     }
 
     public override void OnCollisionEnterState(PlayerManager player, Collision collision)
@@ -33,7 +34,7 @@ public class PlayerJumpState : PlayerBaseState
     {
         if (this.player.gameObject.GetComponent<Rigidbody>().velocity.y < 0)
         {
-            player.SwitchState(new PlayerFallState());
+            player.SwitchState(player.GetFallState());
             //player.TransitionToState(player.fallState);
         }
         //Debug.Log(this.player.gameObject.GetComponent<Rigidbody>().velocity.y);

@@ -20,18 +20,19 @@ public class PlayerWalkState : PlayerBaseState
         if (!context.performed)
         {
             walk = false;
-            PlayerManager.GetInstance().SwitchState(new PlayerIdleState());
+            PlayerManager.GetInstance().SwitchState(player.GetIdleState());
         }
         
         if (context.action.name == "Jump")
         {
-            PlayerManager.GetInstance().SwitchState(new PlayerJumpState());
+            PlayerManager.GetInstance().SwitchState(player.GetJumpState());
         }
-
-        moveX = context.ReadValue<Vector2>().x;
-        moveZ = context.ReadValue<Vector2>().y;
-        walk = true;
-       
+        else
+        {
+            moveX = context.ReadValue<Vector2>().x;
+            moveZ = context.ReadValue<Vector2>().y;
+            walk = true;
+        }
     }
 
     public override void OnCollisionEnterState(PlayerManager player, Collision collision)

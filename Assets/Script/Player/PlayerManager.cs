@@ -9,6 +9,11 @@ public class PlayerManager : MonoBehaviour
     private static PlayerManager instance;
     private PlayerBaseState currentState;
 
+    private PlayerIdleState idleState = new PlayerIdleState();
+    private PlayerWalkState walkState = new PlayerWalkState();
+    private PlayerJumpState jumpState = new PlayerJumpState();
+    private PlayerFallState fallState = new PlayerFallState();
+
     [SerializeField] private Player player;
 
     void Start()
@@ -22,7 +27,7 @@ public class PlayerManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        currentState = new PlayerIdleState();
+        currentState = idleState;
         currentState.EnterState(this);
     }
 
@@ -60,5 +65,25 @@ public class PlayerManager : MonoBehaviour
     public Player GetPlayer()
     {
         return player;
+    }
+
+    public PlayerIdleState GetIdleState()
+    {
+        return idleState;
+    }
+
+    public PlayerWalkState GetWalkState()
+    {
+        return walkState;
+    }
+
+    public PlayerJumpState GetJumpState()
+    {
+        return jumpState;
+    }
+
+    public PlayerFallState GetFallState()
+    {
+        return fallState;
     }
 }

@@ -32,6 +32,6 @@ public class Player : MonoBehaviour
 
     public void Jump()
     {
-        GetComponent<Rigidbody>().velocity = Vector3.up * Mathf.Sqrt(jumpHeight * -1.0f * gravity);
+        GetComponent<Rigidbody>().velocity += Vector3.up * Mathf.Sqrt(jumpHeight * -1.0f * gravity);
     }
 }
