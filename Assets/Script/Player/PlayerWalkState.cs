@@ -53,6 +53,11 @@ public class PlayerWalkState : PlayerBaseState
         }
     }
 
+    public override void ExitState(PlayerManager player)
+    {
+        //throw new System.NotImplementedException();
+    }
+
     private void Walk()
     {
         Vector3 direction = this.player.transform.forward * moveZ + this.player.transform.right * moveX;

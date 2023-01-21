@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerFallState : PlayerBaseState
 {
     private Player player;
+    private bool isRunning = false;
     public override void EnterState(PlayerManager player)
     {
         Debug.Log("Entered Fall State");
@@ -20,8 +21,21 @@ public class PlayerFallState : PlayerBaseState
 
     public override void HandleInputState(PlayerManager player, InputAction.CallbackContext context)
     {
-        Debug.Log("Handling Input Fall State !!!!!!!!!!!!!!!!!!!!!!");
-        //throw new System.NotImplementedException();
+       
+        Debug.Log("Handling Input Fall State : " + context.action.name);
+        //if (context.action.name == "Movement")
+        //{
+        //    Debug.Log("Handling Input Fall State");
+        //    Vector2 input = context.ReadValue<Vector2>();
+        //    if (input.x != 0)
+        //    {
+        //        isRunning = true;
+        //    }
+        //    else
+        //    {
+        //        isRunning = false;
+        //    }
+        //}
     }
 
     public override void OnCollisionEnterState(PlayerManager player, Collision collision)
@@ -34,12 +48,14 @@ public class PlayerFallState : PlayerBaseState
             //player.TransitionToState(player.IdleState);
         }
 
-        if (this.player.GetComponent<Rigidbody>().velocity.x > 0)
+        if (isRunning)
         {
+            Debug.Log("Transition to Run State");
             player.SwitchState(player.GetWalkState());
         }
         else
         {
+            Debug.Log("Transition to Idle State");
             player.SwitchState(player.GetIdleState());
         }
     }
@@ -49,15 +65,8 @@ public class PlayerFallState : PlayerBaseState
         //throw new System.NotImplementedException();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public override void ExitState(PlayerManager player)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //throw new System.NotImplementedException();
     }
 }

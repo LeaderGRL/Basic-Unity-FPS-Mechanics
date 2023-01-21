@@ -7,7 +7,7 @@ public class PlayerIdleState : PlayerBaseState
 {
     public override void EnterState(PlayerManager player)
     {
-        Debug.Log("Entering Idle State");
+        
     }
 
     public override void OnCollisionEnterState(PlayerManager player, Collision collision)
@@ -37,5 +37,9 @@ public class PlayerIdleState : PlayerBaseState
             PlayerManager.GetInstance().SwitchState(player.GetJumpState());
         }
     }
- 
+
+    public override void ExitState(PlayerManager player)
+    {
+        //throw new System.NotImplementedException();
+    }
 }

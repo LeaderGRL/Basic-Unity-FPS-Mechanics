@@ -21,7 +21,7 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void HandleInputState(PlayerManager player, InputAction.CallbackContext context)
     {
-        Debug.Log("Jump !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        Debug.Log("Jump !!!!!!!!!!!!!!!!!!!!!!!!!!!! : " + context.action.name);
 
     }
 
@@ -41,15 +41,8 @@ public class PlayerJumpState : PlayerBaseState
         // throw new System.NotImplementedException();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public override void ExitState(PlayerManager player)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //throw new System.NotImplementedException();
     }
 }
