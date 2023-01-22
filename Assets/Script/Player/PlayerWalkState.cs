@@ -6,32 +6,33 @@ using UnityEngine.InputSystem;
 public class PlayerWalkState : PlayerBaseState
 {
     private Player player;
-    private bool walk = false;
     private float moveX;
     private float moveZ;
     public override void EnterState(PlayerManager player)
     {
         this.player = PlayerManager.GetInstance().GetPlayer();
         //throw new System.NotImplementedException();
+
+
     }
-    
+
     public override void HandleInputState(PlayerManager player, InputAction.CallbackContext context)
     {
         if (!context.performed)
         {
-            walk = false;
-            PlayerManager.GetInstance().SwitchState(player.GetIdleState());
+            this.player.isWalking = false;
+            player.SwitchState(player.GetIdleState());
         }
         
         if (context.action.name == "Jump")
         {
-            PlayerManager.GetInstance().SwitchState(player.GetJumpState());
+            player.SwitchState(player.GetJumpState());
         }
         else
         {
             moveX = context.ReadValue<Vector2>().x;
             moveZ = context.ReadValue<Vector2>().y;
-            walk = true;
+            this.player.isWalking = true;
         }
     }
 
@@ -47,7 +48,7 @@ public class PlayerWalkState : PlayerBaseState
 
     public override void FixedUpdateState(PlayerManager player)
     {
-        if (walk)
+        if (this.player.isWalking)
         {
             Walk();
         }

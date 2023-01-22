@@ -11,6 +11,21 @@ public class PlayerFallState : PlayerBaseState
     {
         Debug.Log("Entered Fall State");
         this.player = player.GetPlayer();
+        InputSystem.res
+        //player.GetComponent<PlayerInput>().actions["Movement"].started += OnMovement;
+        //player.GetComponent<PlayerInput>().actions["Movement"].performed += OnMovement;
+
+        //player.GetComponent<PlayerInput>().actions["Movement"].canceled += OnMovement;
+
+
+
+        if (player.GetComponent<PlayerInput>().actions["Movement"].phase == InputActionPhase.Started)
+        {
+            HandleInputState(player, player.inputContext);
+        }
+
+        //Debug.Log("TEST ! : " + player.inputContext);
+
         //throw new System.NotImplementedException();
     }
 
@@ -48,7 +63,7 @@ public class PlayerFallState : PlayerBaseState
             //player.TransitionToState(player.IdleState);
         }
 
-        if (isRunning)
+        if (player.GetComponent<PlayerInput>().actions["Movement"].phase == InputActionPhase.Started)
         {
             Debug.Log("Transition to Run State");
             player.SwitchState(player.GetWalkState());
@@ -68,5 +83,10 @@ public class PlayerFallState : PlayerBaseState
     public override void ExitState(PlayerManager player)
     {
         //throw new System.NotImplementedException();
+    }
+    
+    public void OnMovement(InputAction.CallbackContext context)
+    {
+        Debug.Log("Running");
     }
 }

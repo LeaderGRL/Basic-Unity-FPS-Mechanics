@@ -24,17 +24,17 @@ public class PlayerIdleState : PlayerBaseState
     {
         //throw new System.NotImplementedException();
     }
-
+    
     public override void HandleInputState(PlayerManager player, InputAction.CallbackContext context)
     {
         if (context.action.name == "Movement")
         {
-            PlayerManager.GetInstance().SwitchState(player.GetWalkState());
+            player.SwitchState(player.GetWalkState());
         }
 
         if (context.action.name == "Jump")
         {
-            PlayerManager.GetInstance().SwitchState(player.GetJumpState());
+            player.SwitchState(player.GetJumpState());
         }
     }
 

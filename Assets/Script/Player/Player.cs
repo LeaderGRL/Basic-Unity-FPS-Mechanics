@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     public float jumpHeight = 2f;
     public float gravity = -9.81f;
 
+    public bool isWalking = false;
+
+
     // Start is called before the first frame update
     void Start()
     {

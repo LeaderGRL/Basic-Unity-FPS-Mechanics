@@ -6,10 +6,10 @@ using UnityEngine.InputSystem;
 public class PlayerJumpState : PlayerBaseState
 {
     private Player player;
+
     public override void EnterState(PlayerManager player)
     {
         //this.player.playerRigidbody.AddForce(Vector2.up * player.jumpForce, ForceMode2D.Impulse);
-        Debug.Log("Jump State");
         this.player = player.GetPlayer();
         this.player.Jump();
     }
@@ -22,7 +22,6 @@ public class PlayerJumpState : PlayerBaseState
     public override void HandleInputState(PlayerManager player, InputAction.CallbackContext context)
     {
         Debug.Log("Jump !!!!!!!!!!!!!!!!!!!!!!!!!!!! : " + context.action.name);
-
     }
 
     public override void OnCollisionEnterState(PlayerManager player, Collision collision)
@@ -40,7 +39,7 @@ public class PlayerJumpState : PlayerBaseState
         //Debug.Log(this.player.gameObject.GetComponent<Rigidbody>().velocity.y);
         // throw new System.NotImplementedException();
     }
-
+    
     public override void ExitState(PlayerManager player)
     {
         //throw new System.NotImplementedException();

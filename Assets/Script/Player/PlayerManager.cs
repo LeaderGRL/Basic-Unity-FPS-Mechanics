@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager instance;
     private PlayerBaseState currentState;
+    public CallbackContext inputContext;
 
     private PlayerIdleState idleState = new PlayerIdleState();
     private PlayerWalkState walkState = new PlayerWalkState();
@@ -55,10 +56,12 @@ public class PlayerManager : MonoBehaviour
     {
         currentState = state;
         currentState.EnterState(this);
+       
     }
 
     public void HandleInput(CallbackContext callBackInput)
     {
+        inputContext = callBackInput;
         currentState.HandleInputState(this, callBackInput);
     }
 
