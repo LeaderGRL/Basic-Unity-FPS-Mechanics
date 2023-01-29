@@ -8,6 +8,7 @@ public class PlayerWalkState : PlayerBaseState
     private Player player;
     private float moveX;
     private float moveZ;
+
     public override void EnterState(PlayerManager player)
     {
         Debug.Log("Entering Walk State");
@@ -15,7 +16,7 @@ public class PlayerWalkState : PlayerBaseState
 
         //InputManager.Instance.GetWalk().started += ctx => Walk(ctx.ReadValue<Vector2>(), 10);
         InputManager.Instance.GetWalk().performed += ctx => Walk(ctx.ReadValue<Vector2>(), 10);
-        InputManager.Instance.GetJump().performed += ctx => player.SwitchState(player.GetJumpState());
+        InputManager.Instance.GetJump().performed += OnJump;
     }
 
     public override void OnCollisionEnterState(PlayerManager player, Collision collision)
@@ -41,12 +42,16 @@ public class PlayerWalkState : PlayerBaseState
         }
 
     }
-
+    
     public override void ExitState(PlayerManager player)
     {
         Debug.Log("Exiting Walk State");
+        Debug.Log(InputManager.Instance.GetJump());
         InputManager.Instance.GetWalk().performed -= ctx => Walk(ctx.ReadValue<Vector2>(), 10);
-        InputManager.Instance.GetJump().performed -= ctx => player.SwitchState(player.GetJumpState());
+        InputManager.Instance.GetJump().performed -= OnJump;
+
+        Debug.Log(InputManager.Instance.GetJump().triggered);
+
     }
 
     private void Walk(Vector2 direction, float speed)
@@ -58,11 +63,8 @@ public class PlayerWalkState : PlayerBaseState
         this.player.gameObject.GetComponent<Rigidbody>().AddForce(d * speed);
     }
 
-    //public void Unsubscribe()
-    //{
-    //    Debug.Log("test");
-    //    InputManager.Instance.GetWalk().performed -= ctx => Walk(ctx.ReadValue<Vector2>(), 10);
-    //    PlayerManager.GetInstance().SwitchState(PlayerManager.GetInstance().GetJumpState());
-    //}
-
+    private void OnJump(InputAction.CallbackContext context)
+    {
+        PlayerManager.GetInstance().SwitchState(PlayerManager.GetInstance().GetJumpState());
+    }
 }
