@@ -10,5 +10,5 @@ public abstract class PlayerBaseState
     public abstract void FixedUpdateState(PlayerManager player);
     public abstract void OnCollisionEnterState(PlayerManager player, Collision collision);
     //public abstract event System.Action<PlayerManager, InputAction.CallbackContext> HandleInputState;
-    public abstract void HandleInputState(PlayerManager player, InputAction.CallbackContext context);
+    //public abstract void HandleInputState(PlayerManager player, InputAction.CallbackContext context);
 }

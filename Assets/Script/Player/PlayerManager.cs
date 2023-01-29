@@ -8,7 +8,6 @@ public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager instance;
     private PlayerBaseState currentState;
-    public CallbackContext inputContext;
 
     private PlayerIdleState idleState = new PlayerIdleState();
     private PlayerWalkState walkState = new PlayerWalkState();
@@ -16,6 +15,8 @@ public class PlayerManager : MonoBehaviour
     private PlayerFallState fallState = new PlayerFallState();
 
     [SerializeField] private Player player;
+
+    public CallbackContext inputContext;
 
     void Start()
     {
@@ -30,6 +31,7 @@ public class PlayerManager : MonoBehaviour
 
         currentState = idleState;
         currentState.EnterState(this);
+
     }
 
     void Update()
@@ -54,16 +56,17 @@ public class PlayerManager : MonoBehaviour
 
     public void SwitchState(PlayerBaseState state)
     {
+        currentState.ExitState(this);
         currentState = state;
         currentState.EnterState(this);
        
     }
 
-    public void HandleInput(CallbackContext callBackInput)
-    {
-        inputContext = callBackInput;
-        currentState.HandleInputState(this, callBackInput);
-    }
+    //public void HandleInput(CallbackContext callBackInput)
+    //{
+    //    inputContext = callBackInput;
+    //    currentState.HandleInputState(this, callBackInput);
+    //}
 
     public Player GetPlayer()
     {

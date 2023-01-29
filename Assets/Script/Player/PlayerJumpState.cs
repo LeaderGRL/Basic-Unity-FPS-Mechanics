@@ -19,11 +19,6 @@ public class PlayerJumpState : PlayerBaseState
         
     }
 
-    public override void HandleInputState(PlayerManager player, InputAction.CallbackContext context)
-    {
-        Debug.Log("Jump !!!!!!!!!!!!!!!!!!!!!!!!!!!! : " + context.action.name);
-    }
-
     public override void OnCollisionEnterState(PlayerManager player, Collision collision)
     {
         //throw new System.NotImplementedException();

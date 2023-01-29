@@ -7,39 +7,37 @@ public class PlayerIdleState : PlayerBaseState
 {
     public override void EnterState(PlayerManager player)
     {
-        
+        Debug.Log("Entering Idle State");
+        InputManager.Instance.GetWalk().performed += ctx => player.SwitchState(player.GetWalkState());
     }
 
     public override void OnCollisionEnterState(PlayerManager player, Collision collision)
     {
-        //throw new System.NotImplementedException();
+        
     }
 
     public override void UpdateState(PlayerManager player)
     {
-        //throw new System.NotImplementedException();
+
     }
 
     public override void FixedUpdateState(PlayerManager player)
     {
         //throw new System.NotImplementedException();
     }
-    
-    public override void HandleInputState(PlayerManager player, InputAction.CallbackContext context)
-    {
-        if (context.action.name == "Movement")
-        {
-            player.SwitchState(player.GetWalkState());
-        }
-
-        if (context.action.name == "Jump")
-        {
-            player.SwitchState(player.GetJumpState());
-        }
-    }
 
     public override void ExitState(PlayerManager player)
     {
         //throw new System.NotImplementedException();
+    }
+
+    private void OnEnable()
+    {
+        //InputManager.Instance.Enable();
+    }
+
+    private void OnDisable()
+    {
+        //InputManager.Instance.Disable();
     }
 }
