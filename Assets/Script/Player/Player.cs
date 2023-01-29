@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     private float maxSpeed = 10;
     private float xSensitivity = 0.2f;
     private float ySensitivity = 0.2f;
+    private float moveX = 0;
+    private float moveZ = 0;
+    private Vector3 direction;
 
     public float jumpHeight = 2f;
     public float gravity = -9.81f;
@@ -45,5 +48,30 @@ public class Player : MonoBehaviour
     public void Jump()
     {
         GetComponent<Rigidbody>().velocity += Vector3.up * Mathf.Sqrt(jumpHeight * -1.0f * gravity);
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        PlayerManager.GetInstance().SwitchState(PlayerManager.GetInstance().GetJumpState());
+    }
+
+    public void OnWalk(InputAction.CallbackContext context)
+    {
+        //moveX = context.ReadValue<Vector2>().x;
+        //moveZ = context.ReadValue<Vector2>().y;
+        //direction = transform.forward * moveZ + transform.right * moveX;
+
+        Walk(context.ReadValue<Vector2>(), maxSpeed);
+        //GetComponent<Rigidbody>().AddForce(direction * maxSpeed);
+    }
+    
+    public void Walk(Vector2 direction, float speed)
+    {
+        moveX = direction.x;
+        moveZ = direction.y;
+        this.direction = transform.forward * moveZ + transform.right * moveX;
+
+        //GetComponent<Rigidbody>().velocity = direction * speed;
+        GetComponent<Rigidbody>().AddForce(this.direction * speed);
     }
 }
