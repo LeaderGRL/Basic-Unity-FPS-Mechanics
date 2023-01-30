@@ -9,6 +9,7 @@ public class GunStateManager : MonoBehaviour
 
     private GunIdleState idleState = new GunIdleState();
     private GunShootState shootState = new GunShootState();
+    private GunReloadState reloadState = new GunReloadState();
 
     [SerializeField] private Gun gun;
 
@@ -70,6 +71,11 @@ public class GunStateManager : MonoBehaviour
     public GunShootState GetShootState()
     {
         return shootState;
+    }
+
+    public GunReloadState GetReloadState()
+    {
+        return reloadState;
     }
 
     public Gun GetGun()

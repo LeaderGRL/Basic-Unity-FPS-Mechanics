@@ -24,7 +24,7 @@ public class Gun : MonoBehaviour
         Shoot();
     }
 
-    private void Shoot()
+    public void Shoot()
     {
         if (!CanShoot())
         {
@@ -50,5 +50,29 @@ public class Gun : MonoBehaviour
     private bool CanShoot()
     {
         return gunData.currentAmmo > 0 && timeSinceLastShot > 1f / (gunData.fireRate / 60f);
+    }
+
+    public void OnReload(InputAction.CallbackContext context)
+    {
+        if (GunStateManager.GetInstance().GetCurrentState() != GunStateManager.GetInstance().GetReloadState())
+        {
+            GunStateManager.GetInstance().SwitchState(GunStateManager.GetInstance().GetReloadState());
+        }
+
+        //StartCoroutine(Reload());
+    }
+
+    public IEnumerator Reload()
+    {
+        if (gunData.currentAmmo == gunData.maxAmmo)
+        {
+            GunStateManager.GetInstance().SwitchState(GunStateManager.GetInstance().GetIdleState());
+            yield break;
+        }
+        
+        yield return new WaitForSeconds(gunData.reloadTime);
+        gunData.currentAmmo = gunData.maxAmmo;
+        Debug.Log("Reloaded");
+        GunStateManager.GetInstance().SwitchState(GunStateManager.GetInstance().GetIdleState());
     }
 }

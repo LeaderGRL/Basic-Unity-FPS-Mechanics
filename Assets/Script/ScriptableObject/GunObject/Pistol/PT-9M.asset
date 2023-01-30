@@ -17,6 +17,6 @@ MonoBehaviour:
   maxDistance: 200
   reloadTime: 1.5
   maxAmmo: 8
-  currentAmmo: 8
+  currentAmmo: 3
   fireRate: 50
   reloading: 0

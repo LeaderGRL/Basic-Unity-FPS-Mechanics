@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
     private InputAction Walk;
     private InputAction Jump;
     private InputAction Shoot;
+    private InputAction Reload;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class InputManager : MonoBehaviour
         SetDefaultWalkInput();
         SetDefaultJumpInput();
         SetDefaultShootInput();
+        SetDefaultReloadInput();
     }
     void Start()
     {
@@ -66,6 +68,12 @@ public class InputManager : MonoBehaviour
         Shoot.AddBinding("<Mouse>/leftButton");
     }
 
+    private void SetDefaultReloadInput()
+    {
+        Reload = new InputAction("Reload", InputActionType.Button);
+        Reload.AddBinding("<Keyboard>/r");
+    }
+
     public InputAction GetWalk()
     {
         return Walk;
@@ -81,11 +89,17 @@ public class InputManager : MonoBehaviour
         return Shoot;
     }
 
+    public InputAction GetReload()
+    {
+        return Reload;
+    }
+
     public void Enable()
     {
         Walk.Enable();
         Jump.Enable();
         Shoot.Enable();
+        Reload.Enable();
     }
 
     public void Disable()
@@ -93,6 +107,7 @@ public class InputManager : MonoBehaviour
         Walk.Disable();
         Jump.Disable();
         Shoot.Disable();
+        Reload.Disable();
     }
 
     public void Dispose()
@@ -100,6 +115,7 @@ public class InputManager : MonoBehaviour
         Walk.Dispose();
         Jump.Dispose();
         Shoot.Dispose();
+        Reload.Dispose();
     }
 
     public void OnEnable()

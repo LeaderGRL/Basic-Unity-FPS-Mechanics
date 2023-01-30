@@ -2,22 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunShootState : GunBaseState
+public class GunReloadState : GunBaseState
 {
     private Gun gun;
     public override void EnterState(GunStateManager gun)
     {
-        Debug.Log("GunShootState");
         this.gun = gun.GetGun();
-        
-        InputManager.Instance.GetShoot().performed += this.gun.OnShoot;
-        InputManager.Instance.GetReload().performed += this.gun.OnReload;
+
+        gun.StartCoroutine(this.gun.Reload());
     }
 
     public override void ExitState(GunStateManager gun)
     {
-        InputManager.Instance.GetShoot().performed -= this.gun.OnShoot;
-        InputManager.Instance.GetReload().performed -= this.gun.OnReload;
+        // throw new System.NotImplementedException();
     }
 
     public override void FixedUpdateState(GunStateManager gun)
@@ -32,13 +29,6 @@ public class GunShootState : GunBaseState
 
     public override void UpdateState(GunStateManager gun)
     {
-        if (InputManager.Instance.GetShoot().ReadValue<float>() != 0)
-        {
-            this.gun.Shoot();
-        }
-        else
-        {
-            gun.SwitchState(gun.GetIdleState());
-        }
+        // throw new System.NotImplementedException();
     }
 }
