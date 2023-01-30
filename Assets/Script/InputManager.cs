@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
 
     private InputAction Walk;
     private InputAction Jump;
+    private InputAction Shoot;
 
     private void Awake()
     {
@@ -21,15 +22,9 @@ public class InputManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        Walk = new InputAction("Walk", InputActionType.Value);
-        Walk.AddCompositeBinding("2DVector(mode=2)")
-            .With("Up", "<Keyboard>/w")
-            .With("Down", "<Keyboard>/s")
-            .With("Left", "<Keyboard>/a")
-            .With("Right", "<Keyboard>/d");
-
-        Jump = new InputAction("Jump", InputActionType.Button);
-        Jump.AddBinding("<Keyboard>/space");
+        SetDefaultWalkInput();
+        SetDefaultJumpInput();
+        SetDefaultShootInput();
     }
     void Start()
     {
@@ -49,10 +44,31 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    private void SetDefaultWalkInput()
+    {
+        Walk = new InputAction("Walk", InputActionType.Value);
+        Walk.AddCompositeBinding("2DVector(mode=2)")
+            .With("Up", "<Keyboard>/w")
+            .With("Down", "<Keyboard>/s")
+            .With("Left", "<Keyboard>/a")
+            .With("Right", "<Keyboard>/d");
+    }
+
+    private void SetDefaultJumpInput()
+    {
+        Jump = new InputAction("Jump", InputActionType.Button);
+        Jump.AddBinding("<Keyboard>/space");
+    }
+
+    private void SetDefaultShootInput()
+    {
+        Shoot = new InputAction("Shoot", InputActionType.Button);
+        Shoot.AddBinding("<Mouse>/leftButton");
+    }
+
     public InputAction GetWalk()
     {
         return Walk;
-        Debug.Log("Walk");
     }
 
     public InputAction GetJump()
@@ -60,22 +76,30 @@ public class InputManager : MonoBehaviour
         return Jump;
     }
 
+    public InputAction GetShoot()
+    {
+        return Shoot;
+    }
+
     public void Enable()
     {
         Walk.Enable();
         Jump.Enable();
+        Shoot.Enable();
     }
 
     public void Disable()
     {
         Walk.Disable();
         Jump.Disable();
+        Shoot.Disable();
     }
 
     public void Dispose()
     {
         Walk.Dispose();
         Jump.Dispose();
+        Shoot.Dispose();
     }
 
     public void OnEnable()

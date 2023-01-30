@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunBaseState : MonoBehaviour
+public abstract class GunBaseState
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void EnterState(GunStateManager gun);
+    public abstract void ExitState(GunStateManager gun);
+    public abstract void UpdateState(GunStateManager gun);
+    public abstract void FixedUpdateState(GunStateManager gun);
+    public abstract void OnCollisionEnterState(GunStateManager gun, Collision collision);
 }
