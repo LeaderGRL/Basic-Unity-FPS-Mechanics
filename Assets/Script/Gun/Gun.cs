@@ -9,6 +9,10 @@ public class Gun : MonoBehaviour
 
     private float timeSinceLastShot = 0f;
 
+    public Transform bulletSpawnPoint;
+    public GameObject bulletPrefab;
+    public float bulletSpeed = 100f;
+
     private void Update()
     {
         timeSinceLastShot += Time.deltaTime;
@@ -40,11 +44,8 @@ public class Gun : MonoBehaviour
 
         gunData.currentAmmo--;
         timeSinceLastShot = 0f;
-        Debug.Log("Shoot");
 
-        // Instantiate bullet
-        // Set bullet velocity
-        // Set bullet damage
+        SpawnBullet();
     }
 
     private bool CanShoot()
@@ -74,5 +75,11 @@ public class Gun : MonoBehaviour
         gunData.currentAmmo = gunData.maxAmmo;
         Debug.Log("Reloaded");
         GunStateManager.GetInstance().SwitchState(GunStateManager.GetInstance().GetIdleState());
+    }
+
+    private void SpawnBullet()
+    {
+        var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletSpeed, ForceMode.Impulse);
     }
 }
