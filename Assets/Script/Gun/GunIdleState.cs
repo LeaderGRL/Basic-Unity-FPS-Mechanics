@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class GunIdleState : GunBaseState
 {
+    private Gun gun;
     public override void EnterState(GunStateManager gun)
     {
-        Debug.Log("Entering Idle State");
-        InputManager.Instance.GetShoot().performed += ctx => gun.SwitchState(gun.GetShootState());
+        this.gun = gun.GetGun();
+
+        InputManager.Instance.GetShoot().performed += this.gun.OnShoot;
     }
 
     public override void ExitState(GunStateManager gun)
     {
-        InputManager.Instance.GetShoot().performed -= ctx => gun.SwitchState(gun.GetShootState());
+        InputManager.Instance.GetShoot().performed -= this.gun.OnShoot;
     }
 
     public override void FixedUpdateState(GunStateManager gun)

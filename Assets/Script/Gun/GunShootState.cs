@@ -15,6 +15,7 @@ public class GunShootState : GunBaseState
 
     public override void ExitState(GunStateManager gun)
     {
+        InputManager.Instance.GetShoot().performed -= this.gun.OnShoot;
     }
 
     public override void FixedUpdateState(GunStateManager gun)

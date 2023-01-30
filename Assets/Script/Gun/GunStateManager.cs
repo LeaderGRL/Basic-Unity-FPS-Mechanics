@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunStateManager : MonoBehaviour
 {
-    private GunStateManager instance;
+    private static GunStateManager instance;
     private GunBaseState currentState;
 
     private GunIdleState idleState = new GunIdleState();
@@ -12,15 +12,15 @@ public class GunStateManager : MonoBehaviour
 
     [SerializeField] private Gun gun;
 
-    public GunStateManager Instance
+    private void Awake()
     {
-        get
+        if (instance == null)
         {
-            if (instance == null)
-            {
-                instance = new GunStateManager();
-            }
-            return instance;
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
         }
     }
 
@@ -43,6 +43,11 @@ public class GunStateManager : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         currentState.OnCollisionEnterState(this, collision);
+    }
+
+    public static GunStateManager GetInstance()
+    {
+        return instance;
     }
 
     public void SwitchState(GunBaseState state)
